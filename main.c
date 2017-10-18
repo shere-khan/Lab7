@@ -17,7 +17,7 @@ int main() {
     int loop, numCases, best, cur;
     int grid[ROWS][COLS], i, j;
     fscanf(ifp, "%d", &numCases);
-
+    printf("numcases: %d\n", numCases);
     // Go through each input case.
     for (loop = 0; loop < numCases; loop++) {
 
@@ -38,8 +38,10 @@ int main() {
                 col_tot += grid[i][j];
             }
 
-            if (col_tot > best_values[0])
+            if (col_tot > best_values[0]) {
+                printf("col_tot: %d\n", col_tot);
                 best_values[0] = col_tot;
+            }
 
             col_tot = 0;
 
@@ -51,8 +53,10 @@ int main() {
         }
 
         best = best_values[0];
+        //printf("value in array: %d\n", best_values[0]);
         best_values[0] = 0;
         for (int k = 1; k < 6; k++) {
+            //printf("value in array: %d\n", best_values[1]);
             if (best_values[k] > best) {
                 best = best_values[k];
             }
@@ -60,7 +64,7 @@ int main() {
         }
 
         // Output result.
-        printf("%d\n", best);
+        //printf("%d\n", best);
     }
 
     fclose(ifp);
