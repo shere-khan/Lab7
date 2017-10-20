@@ -17,54 +17,37 @@ int main() {
     int loop, numCases, best, cur;
     int grid[ROWS][COLS], i, j;
     fscanf(ifp, "%d", &numCases);
-    printf("numcases: %d\n", numCases);
     // Go through each input case.
     for (loop = 0; loop < numCases; loop++) {
 
         // Get this input grid.
         for (i = 0; i < ROWS; i++)
-            for (j = 0; j < COLS; j++)
+            for (j = 0; j < COLS; j++) {
                 fscanf(ifp, "%d", &grid[i][j]);
+            }
 
         // Will store best value for row or column.
         best = 0;
 
-        /*** FILL IN CODE HERE, TO UPDATE BEST, AS NEEDED. ***/
-        int best_values[6] = {0, 0, 0, 0, 0, 0};
-
-        int col_tot = 0;
-        for (i = 0; i < ROWS; i++) {
-            for (j = 0; j < COLS; j++) {
+        for (j = 0; j < COLS; j++) {
+            int col_tot = 0;
+            for (i = 0; i < ROWS; i++)
                 col_tot += grid[i][j];
-            }
 
-            if (col_tot > best_values[0]) {
-                printf("col_tot: %d\n", col_tot);
-                best_values[0] = col_tot;
-            }
-
-            col_tot = 0;
-
-            best_values[1] += grid[i][0];
-            best_values[2] += grid[i][1];
-            best_values[3] += grid[i][2];
-            best_values[4] += grid[i][3];
-            best_values[5] += grid[i][4];
+            if (col_tot > best)
+                best = col_tot;
         }
+        for (i = 0; i < ROWS; i++) {
+            int row_tot = 0;
+            for (j = 0; j < COLS; j++)
+                row_tot += grid[i][j];
 
-        best = best_values[0];
-        //printf("value in array: %d\n", best_values[0]);
-        best_values[0] = 0;
-        for (int k = 1; k < 6; k++) {
-            //printf("value in array: %d\n", best_values[1]);
-            if (best_values[k] > best) {
-                best = best_values[k];
-            }
-            best_values[k] = 0;
+            if (row_tot > best)
+                best = row_tot;
         }
 
         // Output result.
-        //printf("%d\n", best);
+        printf("%d\n", best);
     }
 
     fclose(ifp);
